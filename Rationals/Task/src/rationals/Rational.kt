@@ -62,10 +62,10 @@ private fun normalize(left: Rational, right: Rational): Pair<Rational, Rational>
 
 // String extension
 fun String.toRational(): Rational {
-    val (num: String, den: String) = this.split('/')
-    return if (den == "") {
+    return if (!this.contains('/')) {
         Rational(this.toBigInteger(), BigInteger.ONE)
     } else {
+        val (num: String, den: String) = this.split('/')
         Rational(num.toBigInteger(), den.toBigInteger())
     }
 }
@@ -130,16 +130,16 @@ fun main() {
 }
 
 // Int extension
-private infix fun Int.divBy(i: Int): Rational {
+infix fun Int.divBy(i: Int): Rational {
     return Rational(this.toBigInteger(), i.toBigInteger())
 }
 
 // Long extension
-private infix fun Long.divBy(l: Long): Rational {
+infix fun Long.divBy(l: Long): Rational {
     return Rational(this.toBigInteger(), l.toBigInteger())
 }
 
 // BigInteger extension
-private infix fun BigInteger.divBy(toBigInteger: BigInteger): Any {
+infix fun BigInteger.divBy(toBigInteger: BigInteger): Any {
     return Rational(this, toBigInteger)
 }
